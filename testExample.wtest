@@ -1,9 +1,27 @@
-import example.pepita
+import personajes.*
+import misiones.*
 
-describe "group of tests for pepita" {
+describe "Misiones individuales" {
+  const arquero = new Arquero(agilidad = 11, rango = 40, copas = 12)
+  const guerrera = new Guerrera(fuerza = 300, copas = 8)
+  const equipo = new Equipo(miembros = [arquero, guerrera])
+  const mision = new Mision(tipo = individual)
+  const individual = new Individual(dificultad = 300)
+  const otraMision = new Mision(tipo=porEquipo)
+  test "Arquero puede cumplir mision, superarla y gana copas" {
+    arquero.realizar(mision)
+    assert.equals(612, arquero.copas())
+  }
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  test "Guerrera no puede cumplir mision" {    
+    assert.throwsExceptionWithMessage("Misión no puede comenzar", { guerrera.realizar(mision) })
+  }
+
+  test "Equipo puede cumplir mision"{
+    arquero.realizar(mision)
+    equipo.realizar(otraMision)
+    assert.equals(637, arquero.copas())
+    assert.equals(33, guerrera.copas())
   }
 
 }
