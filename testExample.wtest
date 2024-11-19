@@ -6,8 +6,9 @@ describe "Misiones individuales" {
   const guerrera = new Guerrera(fuerza = 300, copas = 8)
   const equipo = new Equipo(miembros = [arquero, guerrera])
   const mision = new Mision(tipo = individual)
-  const individual = new Individual(dificultad = 300)
+  const individual = new Individual(dificultad = 300, tipo = comun)
   const otraMision = new Mision(tipo=porEquipo)
+  const porEquipo = new PorEquipo()
   test "Arquero puede cumplir mision, superarla y gana copas" {
     arquero.realizar(mision)
     assert.equals(612, arquero.copas())
